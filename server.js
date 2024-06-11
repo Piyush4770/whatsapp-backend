@@ -12,11 +12,7 @@ app.use(cors());
 
 //pusher
 const pusher = new Pusher({
-  appId: "1816740",
-  key: "a30598705f7a495a7f74",
-  secret: "e91fbd7fe3f5fee886b5",
-  cluster: "ap2",
-  useTLS: true
+ 
 });
 
 
