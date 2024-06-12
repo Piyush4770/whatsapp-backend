@@ -12,20 +12,20 @@ app.use(cors());
 
 //pusher
 const pusher = new Pusher({
- 
+
 });
 
 
 
 // DB config
-const connection_url = "mongodb+srv://piyushy:Piyush1212@cluster0.p6ouxtb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const connection_url = ""
 mongoose.connect(connection_url)
     .then(() => console.log('MongoDB connected successfully'))
     .catch(err => console.error('MongoDB connection error:', err))
 
 const db = mongoose.connection;
 db.once('open', () => {
-    console.log('DB connected');
+    console.log('DB connected'); 
 
     const msgCollection = db.collection('messagecontents');
     const changeStream = msgCollection.watch();
@@ -38,8 +38,8 @@ db.once('open', () => {
             pusher.trigger('messages', 'inserted', {
                 name: messageDetails.name,
                 message: messageDetails.message,
-                // timestamp: messageDetails.timestamp,
-                // received: messageDetails.received
+                timestamp: messageDetails.timestamp,
+                received: messageDetails.received
             });
         } else {
             console.log('Error triggering Pusher');
